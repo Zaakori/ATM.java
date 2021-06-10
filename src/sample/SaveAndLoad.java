@@ -1,8 +1,7 @@
 package sample;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 public class SaveAndLoad {
 
@@ -12,14 +11,41 @@ public class SaveAndLoad {
             return false;
         }
 
-        try(BufferedWriter br = new BufferedWriter(new FileWriter("textfiles/userList.txt"))){
+        File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\textfiles\\userList.txt");
 
-            br.write(user.getFirstName() + " " + user.getLastName() + " " + user.getPinCode());
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(userInfoFile))){
+
+            bw.write(user.getFirstName() + " " + user.getLastName() + " " + user.getPinCode());
 
             return true;
         } catch (IOException e){
             return false;
         }
+    }
+
+    public ArrayList<User> loadUserList(){
+
+        ArrayList<User> userList = new ArrayList<>();
+        File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\textfiles\\userList.txt");
+
+
+        try(BufferedReader br = new BufferedReader(new FileReader(userInfoFile))){
+
+           String userLine = br.readLine();
+           String[] userInfoArray = userLine.split(" ");
+
+           User loadUser = new User();
+           loadUser.setFirstName(userInfoArray[0]);
+           loadUser.setLastName(userInfoArray[1]);
+           loadUser.setPinCode(Integer.parseInt(userInfoArray[2]));
+
+           userList.add(loadUser);
+
+        } catch (IOException e){
+            return null;
+        }
+
+        return null;
     }
 
 

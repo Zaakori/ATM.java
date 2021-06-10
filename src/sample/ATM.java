@@ -8,13 +8,12 @@ public class ATM {
     private ArrayList<User> userList;
     private SaveAndLoad saveAndLoad;
 
-    public ArrayList<User> getUserList() {
-        return userList;
-    }
-
     public ATM() {
         this.userList = new ArrayList<>();
         this.saveAndLoad = new SaveAndLoad();
+    }
+    public ArrayList<User> getUserList() {
+        return userList;
     }
 
     public boolean addNewUser(User newUser){
@@ -40,6 +39,15 @@ public class ATM {
 
         userList.add(newUser);
         saveAndLoad.saveUserToTextFile(newUser);
+
+        if(!userList.isEmpty()){
+            for(User u : userList){
+                System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPinCode());
+            }
+        }
+
+
+
         return true;
     }
 

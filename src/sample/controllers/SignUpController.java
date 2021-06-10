@@ -26,9 +26,14 @@ public class SignUpController {
     @FXML
     private Button goBackButton;
 
+    public Button getSignUpButton() {
+        return signUpButton;
+    }
 
+    // when you click a "SIGN UP" button is adds a new User to ATM instance and it is saved into
+    // the .txt file using a SaveAndLoad class. After that it changes the Scene just like "go back" button
     @FXML
-    public void addNewUser(){
+    public void addNewUserAndExit(){
 
         User newUser = new User();
 
@@ -39,24 +44,36 @@ public class SignUpController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("fxml/mainWindow.fxml"));
 
+        Scene mainScene = null;
+        try{
+            mainScene = new Scene(fxmlLoader.load());
+        } catch(IOException e){
+            System.out.println("Could not load Main Window.");
+            return;
+        }
+
         MainController mainCon = fxmlLoader.getController();
         mainCon.getAtm().addNewUser(newUser);
+
+        Stage primaryStage = (Stage) signUpGridPane.getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
 
     }
 
     @FXML
     public void changeSceneToMainWindow(){
 
-        Scene signUpScene = null;
+        Scene mainScene = null;
         try{
-            signUpScene = new Scene(FXMLLoader.load(getClass().getResource("fxml/mainWindow.fxml")));
+            mainScene = new Scene(FXMLLoader.load(getClass().getResource("fxml/mainWindow.fxml")));
         } catch(IOException e){
             System.out.println("Could not load Main Window.");
             return;
         }
 
         Stage primaryStage = (Stage) signUpGridPane.getScene().getWindow();
-        primaryStage.setScene(signUpScene);
+        primaryStage.setScene(mainScene);
         primaryStage.show();
     }
 

@@ -16,7 +16,7 @@
     <TextField fx:id="lastNameTextField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     <Label text="PIN: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
     <TextField fx:id="pinTextField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-    <Button fx:id="signUpButton" text="SIGN UP" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#addNewUser"/>
+    <Button fx:id="signUpButton" text="SIGN UP" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#addNewUserAndExit"/>
     <Button fx:id="goBackButton" text="Go Back" GridPane.rowIndex="7" GridPane.columnIndex="1" onAction="#changeSceneToMainWindow"/>
 
 </GridPane>
