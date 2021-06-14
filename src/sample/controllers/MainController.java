@@ -17,8 +17,7 @@ import java.util.Optional;
 
 public class MainController {
 
-    // WHERE STOPPED - in SaveAndLoad the method loadUserList, I probably
-    // messed up the file reading part, check if that works
+    // WHERE STOPPED - in SaveAndLoad make that it doesn´t override old users and can load multiple users
 
     @FXML
     private GridPane mainGridPane;

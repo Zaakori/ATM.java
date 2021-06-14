@@ -1,8 +1,9 @@
 package sample;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable{
 
     private String firstName;
     private String lastName;
@@ -10,6 +11,8 @@ public class User {
     private double currentFunds;
     private ArrayList<Transaction> transactionList;
     private int amountOfTransactionsMade = 1;
+
+    private long serialVersionUID = 1L;
 
     public User() {
     }

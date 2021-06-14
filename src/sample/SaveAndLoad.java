@@ -11,43 +11,46 @@ public class SaveAndLoad {
             return false;
         }
 
-        File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\textfiles\\userList.txt");
+        File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat");
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(userInfoFile))){
-
-            bw.write(user.getFirstName() + " " + user.getLastName() + " " + user.getPinCode());
+        try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userInfoFile)))){
+            objOut.writeObject(user);
 
             return true;
         } catch (IOException e){
+            System.out.println("IO Exception");
+            e.printStackTrace();
             return false;
         }
     }
 
-    public ArrayList<User> loadUserList(){
+    public ArrayList<User> loadUserList() {
 
         ArrayList<User> userList = new ArrayList<>();
-        File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\textfiles\\userList.txt");
 
+        try (ObjectInputStream objIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream
+                ("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat")))) {
 
-        try(BufferedReader br = new BufferedReader(new FileReader(userInfoFile))){
+            boolean endOfFile = false;
 
-           String userLine = br.readLine();
-           String[] userInfoArray = userLine.split(" ");
+            while (!endOfFile) {
+                try {
+                    User user = (User) objIn.readObject();
 
-           User loadUser = new User();
-           loadUser.setFirstName(userInfoArray[0]);
-           loadUser.setLastName(userInfoArray[1]);
-           loadUser.setPinCode(Integer.parseInt(userInfoArray[2]));
+                    userList.add(user);
+                } catch (EOFException e) {
+                    endOfFile = true;
+                }
+            }
 
-           userList.add(loadUser);
-
-        } catch (IOException e){
-            return null;
+            return userList;
+        } catch (IOException e) {
+            System.out.println("IO Ex in loadUserList");
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class Not Found Ex in loadUserList");
         }
 
         return null;
     }
-
-
-
 }
