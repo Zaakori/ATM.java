@@ -13,7 +13,7 @@ public class SaveAndLoad {
 
         File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat");
 
-        try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userInfoFile)))){
+        try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userInfoFile, true)))){
             objOut.writeObject(user);
 
             return true;
@@ -24,33 +24,61 @@ public class SaveAndLoad {
         }
     }
 
-    public ArrayList<User> loadUserList() {
+    public ArrayList<User> loadUserList(){
 
-        ArrayList<User> userList = new ArrayList<>();
+        try{
+            ArrayList<User> userList = new ArrayList<>();
+            File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat");
+            FileInputStream fileStream = new FileInputStream(userInfoFile);
+            ObjectInputStream objIn = null;
 
-        try (ObjectInputStream objIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream
-                ("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat")))) {
 
-            boolean endOfFile = false;
+            while(fileStream.available() > 0){
 
-            while (!endOfFile) {
-                try {
-                    User user = (User) objIn.readObject();
+                objIn = new ObjectInputStream(fileStream);
+                User user = (User) objIn.readObject();
+                userList.add(user);
 
-                    userList.add(user);
-                } catch (EOFException e) {
-                    endOfFile = true;
-                }
             }
 
+            if(objIn == null){
+                return null;
+            } else {
+                objIn.close();
+            }
             return userList;
-        } catch (IOException e) {
-            System.out.println("IO Ex in loadUserList");
+        } catch (Exception e){
+            System.out.println("Exception in loadUserList");
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class Not Found Ex in loadUserList");
         }
 
         return null;
+
+//        ArrayList<User> userList = new ArrayList<>();
+//
+//        try (ObjectInputStream objIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream
+//                ("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat")))) {
+//
+//            boolean endOfFile = false;
+//
+//            while (!endOfFile) {
+//                try {
+//                    User user = (User) objIn.readObject();
+//
+//                    userList.add(user);
+//                } catch (EOFException e) {
+//                    endOfFile = true;
+//                }
+//            }
+//
+//            return userList;
+//        } catch (IOException e) {
+//            System.out.println("IO Ex in loadUserList");
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Class Not Found Ex in loadUserList");
+//        }
+//
+//        return null;
     }
 }

@@ -17,7 +17,8 @@ import java.util.Optional;
 
 public class MainController {
 
-    // WHERE STOPPED - in SaveAndLoad make that it doesn´t override old users and can load multiple users
+    // WHERE STOPPED - managed to make work so that multiple users
+    // are saved to .dat and are loaded successfully
 
     @FXML
     private GridPane mainGridPane;

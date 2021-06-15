@@ -10,9 +10,12 @@ public class ATM {
 
     public ATM() {
         this.saveAndLoad = new SaveAndLoad();
-        this.userList = saveAndLoad.loadUserList();
 
-        if(userList != null){
+        if(saveAndLoad.loadUserList() != null){
+
+            this.userList = saveAndLoad.loadUserList();
+
+            // for debugging
             for(User u : userList){
                 System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPinCode());
             }
