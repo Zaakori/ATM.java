@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="profileGridPane" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.ProfileController"
+          alignment="center" hgap="10" vgap="10">
+
+    <Button text="Put in Money" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Button text="Take out Money" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Button text="Transfer Money" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Button text="Check Balance" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#changeSceneToCheckBalanceWindow"/>
+    <Button text="Check Transfer history" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+
+    <Button text="EXIT" GridPane.rowIndex="8" GridPane.columnIndex="0" onAction="#changeSceneToMainWindow"/>
+
+</GridPane>

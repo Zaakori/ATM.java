@@ -8,7 +8,7 @@ public class User implements Serializable{
     private String firstName;
     private String lastName;
     private int pinCode;
-    private double currentFunds;
+    private double currentFunds = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
     private int amountOfTransactionsMade = 1;
 
@@ -70,5 +70,17 @@ public class User implements Serializable{
 
     public void setAmountOfTransactionsMade(int amountOfTransactionsMade) {
         this.amountOfTransactionsMade = amountOfTransactionsMade;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        User otherUser = (User) obj;
+
+        if((otherUser.getFirstName().equals(firstName)) && (otherUser.getLastName().equals(lastName)) && (otherUser.getPinCode() == pinCode)){
+            return true;
+        }
+
+        return false;
     }
 }

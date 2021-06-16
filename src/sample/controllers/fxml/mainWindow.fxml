@@ -7,10 +7,14 @@
 <GridPane fx:id="mainGridPane" fx:controller="sample.controllers.MainController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
-    <Label text="Enter full name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <TextField fx:id="nameTextField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-    <Label text="Enter PIN:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <TextField fx:id="pinTextField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-    <Button fx:id="signUpButton" text="Sign Up" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#changeSceneToSignUpWindow"/>
+    <Label fx:id="testLabel" text="Sign In Test: NOT SIGNED IN" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Label text="Enter First Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="firstNameTextField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label text="Enter Last Name:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="lastNameTextField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Label text="Enter PIN:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="pinTextField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Button fx:id="signInButton" text="SIGN IN" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#signIn"/>
+    <Button fx:id="signUpButton" text="Sign Up" GridPane.rowIndex="6" GridPane.columnIndex="1" onAction="#changeSceneToSignUpWindow"/>
 
 </GridPane>

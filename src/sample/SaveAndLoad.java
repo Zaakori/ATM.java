@@ -47,6 +47,8 @@ public class SaveAndLoad {
                 objIn.close();
             }
             return userList;
+        } catch (FileNotFoundException e){
+            System.out.println("FileNotFound in loadUserList, so there is no .dat file or can´t find it.");
         } catch (Exception e){
             System.out.println("Exception in loadUserList");
             e.printStackTrace();

@@ -33,7 +33,7 @@ public class SignUpController {
     // when you click a "SIGN UP" button is adds a new User to ATM instance and it is saved into
     // the .txt file using a SaveAndLoad class. After that it changes the Scene just like "go back" button
     @FXML
-    public void addNewUserAndExit(){
+    public void addNewUserAndExitSignUpWindow(){
 
         User newUser = new User();
 
