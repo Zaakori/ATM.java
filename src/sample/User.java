@@ -8,7 +8,7 @@ public class User implements Serializable{
     private String firstName;
     private String lastName;
     private int pinCode;
-    private double currentFunds = 500;                 // GET RID OF THAT later
+    private double currentMoney = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
     private int amountOfTransactionsMade = 1;
 
@@ -48,12 +48,12 @@ public class User implements Serializable{
         this.pinCode = pinCode;
     }
 
-    public double getCurrentFunds() {
-        return currentFunds;
+    public double getCurrentMoney() {
+        return currentMoney;
     }
 
-    public void setCurrentFunds(double currentFunds) {
-        this.currentFunds = currentFunds;
+    public void setCurrentMoney(double currentMoney) {
+        this.currentMoney = currentMoney;
     }
 
     public ArrayList<Transaction> getTransactionList() {

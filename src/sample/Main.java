@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("controllers/fxml/profileWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("controllers/fxml/mainWindow.fxml"));
         primaryStage.setTitle("ATM interface");
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();

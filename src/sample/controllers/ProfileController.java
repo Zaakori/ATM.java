@@ -14,27 +14,34 @@ public class ProfileController {
     private GridPane profileGridPane;
 
 
+    @FXML
+    public void changeSceneToPutInMoneyWindow(){
 
+        changeScene("putInMoneyWindow.fxml", "Profile - Put In Money");
+    }
 
+    @FXML
+    public void changeSceneToTakeOutMoneyWindow(){
 
-
+        changeScene("takeOutMoneyWindow.fxml", "Profile - Take Out Money");
+    }
 
     @FXML
     public void changeSceneToCheckBalanceWindow(){
 
-        changeScene("checkBalanceWindow.fxml");
+        changeScene("checkBalanceWindow.fxml", "Profile - Check Balance");
 
     }
 
     @FXML
     public void changeSceneToMainWindow(){
 
-        changeScene("mainWindow.fxml");
+        changeScene("mainWindow.fxml", "ATM interface");
 
     }
 
     @FXML
-    public void changeScene(String fxmlFile){
+    public void changeScene(String fxmlFile, String windowTitle){
 
         Scene scene = null;
         try{
@@ -46,6 +53,7 @@ public class ProfileController {
 
         Stage primaryStage = (Stage) profileGridPane.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.setTitle(windowTitle);
         primaryStage.show();
     }
 }

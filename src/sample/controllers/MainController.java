@@ -38,13 +38,14 @@ public class MainController {
     private ATM atm;
     private static User signedInUser;
 
-    public ATM getAtm() {
-        return atm;
-    }
 
     public void initialize(){
         this.atm = new ATM();
         this.signedInUser = new User();
+    }
+
+    public ATM getAtm() {
+        return atm;
     }
 
     public static User getSignedInUser(){
@@ -81,8 +82,26 @@ public class MainController {
     }
 
 
+    @FXML
+    public void changeSceneToProfileWindow() throws IOException{
 
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("fxml/profileWindow.fxml"));
 
+        Scene profileScene = null;
+        try{
+            profileScene = new Scene(fxmlLoader.load());
+        } catch(IOException e){
+            System.out.println("Could not load Profile Window.");
+            return;
+        }
+
+        Stage primaryStage = (Stage) mainGridPane.getScene().getWindow();
+        primaryStage.setScene(profileScene);
+        primaryStage.setTitle("Profile Page");
+        primaryStage.show();
+
+    }
 
     @FXML
     public void changeSceneToSignUpWindow() throws IOException{
@@ -100,29 +119,12 @@ public class MainController {
 
         Stage primaryStage = (Stage) mainGridPane.getScene().getWindow();
         primaryStage.setScene(signUpScene);
+        primaryStage.setTitle("SIGN UP");
         primaryStage.show();
 
     }
 
-    @FXML
-    public void changeSceneToProfileWindow() throws IOException{
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/profileWindow.fxml"));
-
-        Scene profileScene = null;
-        try{
-            profileScene = new Scene(fxmlLoader.load());
-        } catch(IOException e){
-            System.out.println("Could not load Profile Window.");
-            return;
-        }
-
-        Stage primaryStage = (Stage) mainGridPane.getScene().getWindow();
-        primaryStage.setScene(profileScene);
-        primaryStage.show();
-
-    }
 
 
 

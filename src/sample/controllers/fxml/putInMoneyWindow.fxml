@@ -6,9 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.PutInMoneyController"
-            prefHeight="400.0" prefWidth="600.0">
+<GridPane fx:id="putInMoneyGridPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controllers.PutInMoneyController" hgap="10" vgap="10">
 
-</AnchorPane>
+    <Label text="How much money do you wish to add to your account?" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="addMoneyTextField" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Button text="ADD MONEY TO ACCOUNT" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+
+    <Button text="EXIT to Profile Page" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeScene"/>
+
+</GridPane>

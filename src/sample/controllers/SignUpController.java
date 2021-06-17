@@ -74,6 +74,7 @@ public class SignUpController {
 
         Stage primaryStage = (Stage) signUpGridPane.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setTitle("ATM interface");
         primaryStage.show();
     }
 
