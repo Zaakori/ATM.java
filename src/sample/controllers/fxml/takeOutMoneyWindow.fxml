@@ -11,7 +11,7 @@
 
 <Label text="How much money do you wish to withdraw from your account?" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
 <TextField fx:id="takeOutMoneyTextField" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-<Button text="TAKE OUT MONEY FROM ACCOUNT" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+<Button text="TAKE OUT MONEY FROM ACCOUNT" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#takeOutMoney"/>
 
 <Button text="EXIT to Profile Page" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeScene"/>
 

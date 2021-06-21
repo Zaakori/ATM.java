@@ -19,17 +19,30 @@ public class TakeOutMoneyController {
     @FXML
     private TextField takeOutMoneyTextField;
     private User signedInUser;
-    private double amountOfMoney;
-    private ArrayList<Transaction> transactionList;
 
+    // is called every time this Scene is loaded
     public void initialize(){
-
         this.signedInUser = MainController.getSignedInUser();
-        this.amountOfMoney = signedInUser.getCurrentMoney();
-        this.transactionList = signedInUser.getTransactionList();
-
     }
 
+    // allows to take out money from the account
+    @FXML
+    public void takeOutMoney(){
+
+        // check, so that can´t take out negative amounts of money
+        if(Double.parseDouble(takeOutMoneyTextField.getText()) < 0){
+            return;
+        }
+
+        // check, that can´t take out more money than how much user has
+        if(Double.parseDouble(takeOutMoneyTextField.getText()) > signedInUser.getCurrentMoney()){
+            return;
+        }
+
+        signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() - Double.parseDouble(takeOutMoneyTextField.getText()));
+    }
+
+    // changes Scene to Profile Page (so, goes back)
     @FXML
     public void changeScene(){
 

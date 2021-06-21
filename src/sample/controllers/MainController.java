@@ -18,8 +18,8 @@ import java.util.Optional;
 
 public class MainController {
 
-    // WHERE STOPPED - managed to make work so that multiple users
-    // are saved to .dat and are loaded successfully
+    // WHERE STOPPED - money transfer between Users seems to work,
+    // need to implement now the Transactions things, so that they are saved to files and loaded when needed
 
     @FXML
     private GridPane mainGridPane;
@@ -35,7 +35,7 @@ public class MainController {
     private Button signInButton;
     @FXML
     private Button signUpButton;
-    private ATM atm;
+    private static ATM atm;
     private static User signedInUser;
 
 
@@ -44,12 +44,18 @@ public class MainController {
         this.signedInUser = new User();
     }
 
-    public ATM getAtm() {
+    public static ATM getAtm() {
         return atm;
     }
 
     public static User getSignedInUser(){
         return signedInUser;
+    }
+
+    public static User findUser(String inputFirstName, String inputLastName){
+
+    return atm.findAndReturnUser(inputFirstName, inputLastName);
+
     }
 
     @FXML

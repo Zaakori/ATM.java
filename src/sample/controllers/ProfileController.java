@@ -27,6 +27,13 @@ public class ProfileController {
     }
 
     @FXML
+    public void changeSceneToTransferMoneyWindow(){
+
+        changeScene("transferMoneyWindow.fxml", "Profile - Transfer Money");
+    }
+
+
+    @FXML
     public void changeSceneToCheckBalanceWindow(){
 
         changeScene("checkBalanceWindow.fxml", "Profile - Check Balance");
@@ -48,6 +55,7 @@ public class ProfileController {
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/" + fxmlFile)));
         } catch(IOException e){
             System.out.println("Could not load Window.");
+            e.printStackTrace();
             return;
         }
 

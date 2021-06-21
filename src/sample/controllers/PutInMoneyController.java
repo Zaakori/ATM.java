@@ -19,26 +19,27 @@ public class PutInMoneyController {
     @FXML
     private TextField addMoneyTextField;
     private User signedInUser;
-    private double amountOfMoney;
-    private ArrayList<Transaction> transactionList;
+
 
     public void initialize(){
-
         this.signedInUser = MainController.getSignedInUser();
-        this.amountOfMoney = signedInUser.getCurrentMoney();
-        this.transactionList = signedInUser.getTransactionList();
-
     }
 
 
-
+    // adds money to the Users account
     @FXML
     public void addMoneyToBalance(){
 
-        amountOfMoney += Double.parseDouble(addMoneyTextField.getText());
+        // checks, that you can´t add negative amounts of money
+        if(Double.parseDouble(addMoneyTextField.getText()) < 0){
+            return;
+        }
 
+        // adds the money
+        signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() + Double.parseDouble(addMoneyTextField.getText()));
     }
 
+    // changes Scene to Profile Page
     @FXML
     public void changeScene(){
 

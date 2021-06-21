@@ -11,7 +11,7 @@
 
     <Label text="How much money do you wish to add to your account?" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <TextField fx:id="addMoneyTextField" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <Button text="ADD MONEY TO ACCOUNT" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Button text="ADD MONEY TO ACCOUNT" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#addMoneyToBalance"/>
 
     <Button text="EXIT to Profile Page" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeScene"/>
 

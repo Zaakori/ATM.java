@@ -16,9 +16,10 @@ public class CheckBalanceController {
     @FXML
     private Label balanceLabel;
 
-    private double balance = MainController.getSignedInUser().getCurrentMoney();
+    private double balance;
 
     public void initialize(){
+        balance = MainController.getSignedInUser().getCurrentMoney();
         balanceLabel.setText("You have: " + Double.toString(balance) + " EUR");
     }
 

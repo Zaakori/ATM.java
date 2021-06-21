@@ -28,6 +28,24 @@ public class ATM {
         return userList;
     }
 
+    public User findAndReturnUser(String inputFirstName, String inputLastName){
+
+        if(inputFirstName.trim().equals("") || inputLastName.trim().equals("")){
+            return null;
+        }
+
+        for(User u : userList){
+
+            if(u.getFirstName().equals(inputFirstName) && u.getLastName().equals(inputLastName)){
+                System.out.println("found the user! its: " + u.getFirstName() + " " + u.getLastName());
+                return u;
+            }
+        }
+
+        System.out.println("did not find such user");
+        return null;
+    }
+
     public boolean addNewUser(User newUser){
 
         int pinCode = newUser.getPinCode();

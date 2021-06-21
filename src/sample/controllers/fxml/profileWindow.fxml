@@ -11,7 +11,7 @@
 
     <Button text="Put in Money" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#changeSceneToPutInMoneyWindow"/>
     <Button text="Take out Money" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#changeSceneToTakeOutMoneyWindow"/>
-    <Button text="Transfer Money" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Button text="Transfer Money" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeSceneToTransferMoneyWindow"/>
     <Button text="Check Balance" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#changeSceneToCheckBalanceWindow"/>
     <Button text="Check Transfer history" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 
