@@ -82,21 +82,21 @@ public class ATM {
         return true;
     }
 
-    public boolean deleteUser(User userToDelete){
+    public void addNewFullTransaction(Transaction newTransactionForSender, Transaction newTransactionForReceiver, User moneySender, User moneyReceiver){
 
-        if(userToDelete == null){
-            System.out.println("No user chosen for deletion");
-            return false;
-        }
+    // save new Full Transaction Object to User
+    moneySender.addTransaction(newTransactionForSender);
+    moneyReceiver.addTransaction(newTransactionForReceiver);
 
-        if(!(userList.contains(userToDelete))){
-            System.out.println("There is no such user in the system.");
-            return false;
-        }
+    // save new Full Transaction to .dat file
+    saveAndLoad.saveNewTransaction(newTransactionForSender, moneySender);
+    saveAndLoad.saveNewTransaction(newTransactionForReceiver, moneyReceiver);
 
-        userList.remove(userToDelete);
-        return true;
     }
+
+
+
+
 
     private boolean stringValidation(String userInput){
 

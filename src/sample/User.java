@@ -10,7 +10,7 @@ public class User implements Serializable{
     private int pinCode;
     private double currentMoney = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
-    private int amountOfTransactionsMade = 1;
+    private static int amountOfTransactionsMade = 1;
 
     private long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class User implements Serializable{
         this.firstName = firstName;
         this.lastName = lastName;
         this.pinCode = pinCode;
-        this.transactionList = new ArrayList<Transaction>();
+        this.transactionList = new ArrayList<>();
     }
 
     public String getFirstName() {
@@ -60,16 +60,23 @@ public class User implements Serializable{
         return transactionList;
     }
 
-    public void setTransactionList(ArrayList<Transaction> transactionList) {
-        this.transactionList = transactionList;
-    }
-
     public int getAmountOfTransactionsMade() {
-        return amountOfTransactionsMade;
+
+        int amountOfTransactions = amountOfTransactionsMade;
+
+        amountOfTransactionsMade++;
+
+        return amountOfTransactions;
     }
 
-    public void setAmountOfTransactionsMade(int amountOfTransactionsMade) {
-        this.amountOfTransactionsMade = amountOfTransactionsMade;
+    public void addTransaction(Transaction newTransaction){
+
+        if(transactionList == null){
+            transactionList = new ArrayList<>();
+        }
+
+        transactionList.add(newTransaction);
+
     }
 
     @Override

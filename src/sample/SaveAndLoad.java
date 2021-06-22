@@ -55,32 +55,39 @@ public class SaveAndLoad {
         }
 
         return null;
-
-//        ArrayList<User> userList = new ArrayList<>();
-//
-//        try (ObjectInputStream objIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream
-//                ("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat")))) {
-//
-//            boolean endOfFile = false;
-//
-//            while (!endOfFile) {
-//                try {
-//                    User user = (User) objIn.readObject();
-//
-//                    userList.add(user);
-//                } catch (EOFException e) {
-//                    endOfFile = true;
-//                }
-//            }
-//
-//            return userList;
-//        } catch (IOException e) {
-//            System.out.println("IO Ex in loadUserList");
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Class Not Found Ex in loadUserList");
-//        }
-//
-//        return null;
     }
+
+    // saves (adds) a new transaction to a .txt file, there is a separate file for each User.
+    // if there is no file the new file gets created
+    public boolean saveNewTransaction(Transaction newTransaction, User theUser){
+
+        if((newTransaction == null) || (theUser == null)){
+            return false;
+        }
+
+        File userTransactionFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\"
+            + theUser.getFirstName() + theUser.getLastName() + "TransactionList.dat");
+
+
+        try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userTransactionFile, true)))){
+            objOut.writeObject(newTransaction);
+
+            return true;
+        } catch (IOException e){
+            System.out.println("IO Exception");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+//    // loads needed Transaction list to the needed User
+//    public ArrayList<Transaction> loadTransactionList(){
+//
+//
+//
+//    }
+
+
+
+
 }

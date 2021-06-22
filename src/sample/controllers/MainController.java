@@ -18,8 +18,9 @@ import java.util.Optional;
 
 public class MainController {
 
-    // WHERE STOPPED - money transfer between Users seems to work,
-    // need to implement now the Transactions things, so that they are saved to files and loaded when needed
+    // WHERE STOPPED - need to make so that SaveAndLoad loads the TransactionLists when the program starts,
+    // and TransactionList needs to be added to each User (that actually has one),
+    // if User hasn´t made any transactions then just make new ArrayList<Transaction>, so it wouldn´t be null
 
     @FXML
     private GridPane mainGridPane;
@@ -65,6 +66,7 @@ public class MainController {
         String firstName = firstNameTextField.getText().trim();
         String lastName = lastNameTextField.getText().trim();
         int pin = Integer.parseInt(pinTextField.getText().trim());
+
         User inputUser = new User(firstName, lastName, pin);
         boolean exitWhileLoop = true;
 

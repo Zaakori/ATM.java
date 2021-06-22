@@ -3,13 +3,15 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.ATM;
+import sample.Transaction;
 import sample.User;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 public class TransferMoneyController {
@@ -24,10 +26,10 @@ public class TransferMoneyController {
     private TextField sendMoneyTextField;
 
     private User signedInUser = MainController.getSignedInUser();
+    private ATM atm = MainController.getAtm();
 
 
-
-
+    // actually sends money from one User to the other
     @FXML
     public void transferMoney(){
 
@@ -53,8 +55,30 @@ public class TransferMoneyController {
         System.out.println("signed in user now has " + MainController.getSignedInUser().getCurrentMoney());
 
 
+        makeAndSaveFullTransaction(foundUser, transferAmount);
 
     }
+
+    // makes a Transaction, so just writes down all the info about sending the money
+    private void makeAndSaveFullTransaction(User moneyReceiver, double transferAmount){
+
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+
+        Transaction senderTransaction = new Transaction(signedInUser.getAmountOfTransactionsMade(),
+                signedInUser.getFirstName() + " " + signedInUser.getLastName(),
+                moneyReceiver.getFirstName() + " " + moneyReceiver.getLastName(),
+                -transferAmount, dateTimeNow, signedInUser.getCurrentMoney());
+
+        Transaction receiverTransaction = new Transaction(moneyReceiver.getAmountOfTransactionsMade(),
+                signedInUser.getFirstName() + " " + signedInUser.getLastName(),
+                moneyReceiver.getFirstName() + " " + moneyReceiver.getLastName(),
+                transferAmount, dateTimeNow, moneyReceiver.getCurrentMoney());
+
+        atm.addNewFullTransaction(senderTransaction, receiverTransaction, signedInUser, moneyReceiver);
+
+    }
+
+
 
     // changes Scene to Profile Page (goes back)
     @FXML
