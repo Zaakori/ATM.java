@@ -41,6 +41,15 @@ public class ProfileController {
     }
 
     @FXML
+    public void changeSceneToTransferHistoryWindow(){
+
+        changeScene("transferHistoryWindow.fxml", "Profile - Transfer History");
+
+    }
+
+
+
+    @FXML
     public void changeSceneToMainWindow(){
 
         changeScene("mainWindow.fxml", "ATM interface");

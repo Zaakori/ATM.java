@@ -3,8 +3,6 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -13,14 +11,12 @@ import sample.ATM;
 import sample.User;
 
 import java.io.IOException;
-import java.util.Optional;
-
 
 public class MainController {
 
-    // WHERE STOPPED - need to make so that SaveAndLoad loads the TransactionLists when the program starts,
-    // and TransactionList needs to be added to each User (that actually has one),
-    // if User hasn´t made any transactions then just make new ArrayList<Transaction>, so it wouldn´t be null
+    // WHERE STOPPED - implementing the TableView in transferHistoryWindow. I changed all fields in Transaction class to Simple---Strings
+    // so there may be some problems because now everything is a String. Started implementing so that you can see the data in TableView and because of that
+    // it´s needed to add some stuff in User and in TransferHistoryController.
 
     @FXML
     private GridPane mainGridPane;
@@ -32,10 +28,6 @@ public class MainController {
     private TextField lastNameTextField;
     @FXML
     private TextField pinTextField;
-    @FXML
-    private Button signInButton;
-    @FXML
-    private Button signUpButton;
     private static ATM atm;
     private static User signedInUser;
 
@@ -131,10 +123,4 @@ public class MainController {
         primaryStage.show();
 
     }
-
-
-
-
-
-
 }

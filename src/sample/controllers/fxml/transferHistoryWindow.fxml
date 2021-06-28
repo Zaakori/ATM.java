@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import sample.Transaction?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<GridPane fx:id="transferHistoryGridPane" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controllers.TransferHistoryController">
+
+    <TableView fx:id="tableView" GridPane.rowIndex="1" GridPane.columnIndex="0">
+        <columns>
+            <TableColumn>
+                <cellValueFactory><PropertyValueFactory property="transactionNumber" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn text="Sender">
+                <cellValueFactory><PropertyValueFactory property="senderFullName" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn text="Receiver">
+                <cellValueFactory><PropertyValueFactory property="receiverFullName" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn text="Money Transferred">
+                <cellValueFactory><PropertyValueFactory property="moneyAmountTransfered" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn text="Date and Time">
+                <cellValueFactory><PropertyValueFactory property="dateAndTime" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn text="Money Remaining">
+                <cellValueFactory><PropertyValueFactory property="moneyLeft" />
+                </cellValueFactory>
+            </TableColumn>
+
+        </columns>
+    </TableView>
+
+
+
+    <Button text="EXIT to Profile Page" onAction="#changeScene" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+
+</GridPane>

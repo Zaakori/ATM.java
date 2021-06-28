@@ -12,6 +12,7 @@ import sample.User;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class TransferMoneyController {
@@ -48,6 +49,11 @@ public class TransferMoneyController {
             return;
         }
 
+        if(foundUser.equals(signedInUser)){
+            System.out.println("no use in sending money to yourself");
+            return;
+        }
+
         signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() - transferAmount);
         foundUser.setCurrentMoney(foundUser.getCurrentMoney() + transferAmount);
 
@@ -63,22 +69,23 @@ public class TransferMoneyController {
     private void makeAndSaveFullTransaction(User moneyReceiver, double transferAmount){
 
         LocalDateTime dateTimeNow = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateTimeNow.format(formatter);
+
 
         Transaction senderTransaction = new Transaction(signedInUser.getAmountOfTransactionsMade(),
                 signedInUser.getFirstName() + " " + signedInUser.getLastName(),
                 moneyReceiver.getFirstName() + " " + moneyReceiver.getLastName(),
-                -transferAmount, dateTimeNow, signedInUser.getCurrentMoney());
+                -transferAmount, formattedDateTime, signedInUser.getCurrentMoney());
 
         Transaction receiverTransaction = new Transaction(moneyReceiver.getAmountOfTransactionsMade(),
                 signedInUser.getFirstName() + " " + signedInUser.getLastName(),
                 moneyReceiver.getFirstName() + " " + moneyReceiver.getLastName(),
-                transferAmount, dateTimeNow, moneyReceiver.getCurrentMoney());
+                transferAmount, formattedDateTime, moneyReceiver.getCurrentMoney());
 
         atm.addNewFullTransaction(senderTransaction, receiverTransaction, signedInUser, moneyReceiver);
 
     }
-
-
 
     // changes Scene to Profile Page (goes back)
     @FXML
@@ -97,7 +104,4 @@ public class TransferMoneyController {
         primaryStage.setTitle("Profile Page");
         primaryStage.show();
     }
-
-
-
 }

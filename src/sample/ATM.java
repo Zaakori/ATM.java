@@ -23,7 +23,21 @@ public class ATM {
             this.userList = new ArrayList<>();
         }
 
+        // loads every Users personal Transaction list from a file (if such exists)
+        for(User u : userList){
+
+            if(saveAndLoad.loadTransactionList(u) != null){
+                u.setTransactionList(saveAndLoad.loadTransactionList(u));
+
+                Transaction lastTransaction = u.getTransactionList().get(u.getTransactionList().size() - 1);
+
+                u.setAmountOfTransactionsMade(lastTransaction.getTransactionNumber());
+                u.setCurrentMoney(lastTransaction.getMoneyLeft());
+
+            }
+        }
     }
+
     public ArrayList<User> getUserList() {
         return userList;
     }
@@ -77,8 +91,6 @@ public class ATM {
             }
         }
 
-
-
         return true;
     }
 
@@ -93,10 +105,6 @@ public class ATM {
     saveAndLoad.saveNewTransaction(newTransactionForReceiver, moneyReceiver);
 
     }
-
-
-
-
 
     private boolean stringValidation(String userInput){
 

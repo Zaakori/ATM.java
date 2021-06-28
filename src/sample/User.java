@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,7 +12,8 @@ public class User implements Serializable{
     private int pinCode;
     private double currentMoney = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
-    private static int amountOfTransactionsMade = 1;
+    private ObservableList<Transaction> observableTransactionList;
+    private int amountOfTransactionsMade = 1;
 
     private long serialVersionUID = 1L;
 
@@ -22,6 +25,7 @@ public class User implements Serializable{
         this.lastName = lastName;
         this.pinCode = pinCode;
         this.transactionList = new ArrayList<>();
+//        this.observableTransactionList = new
     }
 
     public String getFirstName() {
@@ -60,6 +64,20 @@ public class User implements Serializable{
         return transactionList;
     }
 
+//    public ObservableList<Transaction> getObservableTransactionList(){
+//
+//    }
+
+    public void setTransactionList(ArrayList<Transaction> transactionList){
+
+        if(transactionList == null){
+            return;
+        }
+
+        this.transactionList = transactionList;
+
+    }
+
     public int getAmountOfTransactionsMade() {
 
         int amountOfTransactions = amountOfTransactionsMade;
@@ -67,6 +85,14 @@ public class User implements Serializable{
         amountOfTransactionsMade++;
 
         return amountOfTransactions;
+    }
+
+    public void setAmountOfTransactionsMade(int amountOfTransactions){
+
+        amountOfTransactions++;
+
+        amountOfTransactionsMade = amountOfTransactions;
+
     }
 
     public void addTransaction(Transaction newTransaction){

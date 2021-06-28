@@ -46,7 +46,9 @@ public class SaveAndLoad {
             } else {
                 objIn.close();
             }
+
             return userList;
+
         } catch (FileNotFoundException e){
             System.out.println("FileNotFound in loadUserList, so there is no .dat file or can´t find it.");
         } catch (Exception e){
@@ -60,6 +62,8 @@ public class SaveAndLoad {
     // saves (adds) a new transaction to a .txt file, there is a separate file for each User.
     // if there is no file the new file gets created
     public boolean saveNewTransaction(Transaction newTransaction, User theUser){
+
+        System.out.println(newTransaction.toString());
 
         if((newTransaction == null) || (theUser == null)){
             return false;
@@ -80,14 +84,53 @@ public class SaveAndLoad {
         }
     }
 
-//    // loads needed Transaction list to the needed User
-//    public ArrayList<Transaction> loadTransactionList(){
-//
-//
-//
-//    }
+    // loads needed Transaction list to the needed User
+    public ArrayList<Transaction> loadTransactionList(User theUser){
+
+        File userTransactionFile = null;
+        boolean fileExists = false;
+
+        // checking, if the selected User even has made any Transactions a.k.a even has a TransactionList file
+            userTransactionFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\"
+                    + theUser.getFirstName() + theUser.getLastName() + "TransactionList.dat");
+
+            fileExists = userTransactionFile.exists();
 
 
+        if(fileExists){
+
+            try{
+
+                ArrayList<Transaction> personalTransactionList = new ArrayList<>();
+                FileInputStream fileStream = new FileInputStream(userTransactionFile);
+                ObjectInputStream objIn = null;
 
 
+                while(fileStream.available() > 0){
+
+                    objIn = new ObjectInputStream(fileStream);
+                    Transaction transaction = (Transaction) objIn.readObject();
+                    personalTransactionList.add(transaction);
+
+                }
+
+                if(objIn == null){
+                    return null;
+                } else {
+                    objIn.close();
+                }
+
+                return personalTransactionList;
+
+            } catch (IOException e) {
+                System.out.println("something wrong in SaveAndLoad, loadTransactionList");
+                e.printStackTrace();
+            } catch (ClassNotFoundException c){
+                System.out.println("in SaveAndLoad, loadTransactionList - ClassNotFoundException");
+                c.printStackTrace();
+            }
+        }
+
+        return null;
+    }
 }
