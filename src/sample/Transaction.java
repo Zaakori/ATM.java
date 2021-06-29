@@ -6,33 +6,47 @@ import java.io.Serializable;
 
 public class Transaction implements Serializable {
 
-    private SimpleStringProperty transactionNumber;
-    private SimpleStringProperty senderFullName;
-    private SimpleStringProperty receiverFullName;
-    private SimpleStringProperty moneyAmountTransfered;
-    private SimpleStringProperty dateAndTime;
-    private SimpleStringProperty moneyLeft;
+    private int transactionNumber;
+    private String senderFullName;
+    private String receiverFullName;
+    private double moneyAmountTransfered;
+    private String dateAndTime;
+    private double moneyLeft;
 
-    private long serialVersionUID = 2L;
+    private static final long serialVersionUID = 2L;
 
-    public Transaction(int transactionNumber, String senderFullName, String receiverFullName,
-                       double moneyAmountTransfered, String dateAndTime, double moneyLeft) {
-
-        this.transactionNumber.set(Integer.toString(transactionNumber));
-        this.senderFullName.set(senderFullName);
-        this.receiverFullName.set(receiverFullName);
-        this.moneyAmountTransfered.set(Double.toString(moneyAmountTransfered));
-        this.dateAndTime.set(dateAndTime);
-        this.moneyLeft.set(Double.toString(moneyLeft));
-
+    public Transaction(int transactionNumber, String senderFullName, String receiverFullName, double moneyAmountTransfered,
+                       String dateAndTime, double moneyLeft) {
+        this.transactionNumber = transactionNumber;
+        this.senderFullName = senderFullName;
+        this.receiverFullName = receiverFullName;
+        this.moneyAmountTransfered = moneyAmountTransfered;
+        this.dateAndTime = dateAndTime;
+        this.moneyLeft = moneyLeft;
     }
 
     public int getTransactionNumber() {
-        return Integer.parseInt(transactionNumber.get());
+        return transactionNumber;
+    }
+
+    public String getSenderFullName() {
+        return senderFullName;
+    }
+
+    public String getReceiverFullName() {
+        return receiverFullName;
+    }
+
+    public double getMoneyAmountTransfered() {
+        return moneyAmountTransfered;
+    }
+
+    public String getDateAndTime() {
+        return dateAndTime;
     }
 
     public double getMoneyLeft() {
-        return Double.parseDouble(moneyLeft.get());
+        return moneyLeft;
     }
 
     @Override

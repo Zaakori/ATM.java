@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
@@ -12,12 +13,17 @@ public class User implements Serializable{
     private int pinCode;
     private double currentMoney = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
-    private ObservableList<Transaction> observableTransactionList;
+    private ObservableList<ObservableTransaction> observableTransactionList = FXCollections.observableArrayList();;
     private int amountOfTransactionsMade = 1;
 
-    private long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public User() {
+        if(this.observableTransactionList == null) {
+            System.out.println("WHY THE HELL YOU ARE NULL??!!");
+            observableTransactionList = FXCollections.observableArrayList();;
+
+        }
     }
 
     public User(String firstName, String lastName, int pinCode) {
@@ -25,7 +31,6 @@ public class User implements Serializable{
         this.lastName = lastName;
         this.pinCode = pinCode;
         this.transactionList = new ArrayList<>();
-//        this.observableTransactionList = new
     }
 
     public String getFirstName() {
@@ -64,10 +69,6 @@ public class User implements Serializable{
         return transactionList;
     }
 
-//    public ObservableList<Transaction> getObservableTransactionList(){
-//
-//    }
-
     public void setTransactionList(ArrayList<Transaction> transactionList){
 
         if(transactionList == null){
@@ -77,6 +78,20 @@ public class User implements Serializable{
         this.transactionList = transactionList;
 
     }
+
+    public ObservableList<ObservableTransaction> getObservableTransactionList(){
+        return observableTransactionList;
+    }
+
+    public void resetObservableTransactionList(){
+
+        for(Transaction t : transactionList){
+
+            observableTransactionList.add(new ObservableTransaction(t.getTransactionNumber(), t.getSenderFullName(), t.getReceiverFullName(),
+                    t.getMoneyAmountTransfered(), t.getDateAndTime(), t.getMoneyLeft()));
+        }
+    }
+
 
     public int getAmountOfTransactionsMade() {
 

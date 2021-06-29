@@ -14,9 +14,10 @@ import java.io.IOException;
 
 public class MainController {
 
-    // WHERE STOPPED - implementing the TableView in transferHistoryWindow. I changed all fields in Transaction class to Simple---Strings
-    // so there may be some problems because now everything is a String. Started implementing so that you can see the data in TableView and because of that
-    // it´s needed to add some stuff in User and in TransferHistoryController.
+    // WHERE STOPPED - implementing the TableView in transferHistoryWindow. Made a new class ObservableTransaction that is just a copy
+    // of Transaction but it can be used in TableView but there is some problem with its Serializability. I should do it in a way that
+    // Transaction is actually what is getting saved to .dat file and ObservableTransaction is exists only during applications runtime
+    // so that it is not being saved but copied every time from Transaction.
 
     @FXML
     private GridPane mainGridPane;

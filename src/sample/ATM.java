@@ -28,6 +28,7 @@ public class ATM {
 
             if(saveAndLoad.loadTransactionList(u) != null){
                 u.setTransactionList(saveAndLoad.loadTransactionList(u));
+                u.resetObservableTransactionList();
 
                 Transaction lastTransaction = u.getTransactionList().get(u.getTransactionList().size() - 1);
 
@@ -99,6 +100,10 @@ public class ATM {
     // save new Full Transaction Object to User
     moneySender.addTransaction(newTransactionForSender);
     moneyReceiver.addTransaction(newTransactionForReceiver);
+
+    // copies the new Transaction to the Users ObservableList, so it can be seen in TransactionHistory
+    moneySender.resetObservableTransactionList();
+    moneyReceiver.resetObservableTransactionList();
 
     // save new Full Transaction to .dat file
     saveAndLoad.saveNewTransaction(newTransactionForSender, moneySender);

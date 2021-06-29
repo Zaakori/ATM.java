@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.User;
 
 import java.io.IOException;
 
@@ -18,8 +19,7 @@ public class TransferHistoryController {
 
     public void initialize(){
 
-//        tableView.set
-
+        tableView.setItems(MainController.getSignedInUser().getObservableTransactionList());
 
     }
 
