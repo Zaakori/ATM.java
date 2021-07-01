@@ -14,8 +14,9 @@
     <TextField fx:id="firstNameTextField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
     <Label text="Last Name: " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
     <TextField fx:id="lastNameTextField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-    <Label text="PIN: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-    <TextField fx:id="pinTextField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Label text="Password (at least 5 characters): " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <TextField fx:id="passwordTextField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Label fx:id="label" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
     <Button fx:id="signUpButton" text="SIGN UP" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#addNewUserAndExitSignUpWindow"/>
     <Button fx:id="goBackButton" text="Go Back" GridPane.rowIndex="7" GridPane.columnIndex="1" onAction="#changeSceneToMainWindow"/>
 

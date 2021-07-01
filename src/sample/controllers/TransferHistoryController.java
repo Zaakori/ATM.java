@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -19,9 +20,12 @@ public class TransferHistoryController {
 
     public void initialize(){
 
-        tableView.setItems(MainController.getSignedInUser().getObservableTransactionList());
-
+        if(MainController.getSignedInUser().getTransactionList() != null){
+            tableView.setItems(MainController.getAtm().getSignedInUserObservableList());
+        }
     }
+
+
 
     // changes Scene to Profile Page (so, goes back)
     @FXML

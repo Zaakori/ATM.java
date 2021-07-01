@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import sample.controllers.MainController;
+
 import java.util.ArrayList;
 
 
@@ -7,9 +11,11 @@ public class ATM {
 
     private ArrayList<User> userList;
     private SaveAndLoad saveAndLoad;
+    private ObservableList<ObservableTransaction> signedInUserObservableList;
 
     public ATM() {
         this.saveAndLoad = new SaveAndLoad();
+        this.signedInUserObservableList = FXCollections.observableArrayList();
 
         if(saveAndLoad.loadUserList() != null){
 
@@ -17,7 +23,7 @@ public class ATM {
 
             // for debugging
             for(User u : userList){
-                System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPinCode());
+                System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPassword());
             }
         } else {
             this.userList = new ArrayList<>();
@@ -28,7 +34,6 @@ public class ATM {
 
             if(saveAndLoad.loadTransactionList(u) != null){
                 u.setTransactionList(saveAndLoad.loadTransactionList(u));
-                u.resetObservableTransactionList();
 
                 Transaction lastTransaction = u.getTransactionList().get(u.getTransactionList().size() - 1);
 
@@ -41,6 +46,18 @@ public class ATM {
 
     public ArrayList<User> getUserList() {
         return userList;
+    }
+
+    public ObservableList<ObservableTransaction> getSignedInUserObservableList(){
+
+        for(Transaction t :  MainController.getSignedInUser().getTransactionList()){
+
+            signedInUserObservableList.add(new ObservableTransaction(t.getTransactionNumber(), t.getSenderFullName(),
+                    t.getReceiverFullName(), t.getMoneyAmountTransfered(), t.getDateAndTime(), t.getMoneyLeft()));
+
+        }
+
+        return signedInUserObservableList;
     }
 
     public User findAndReturnUser(String inputFirstName, String inputLastName){
@@ -63,12 +80,20 @@ public class ATM {
 
     public boolean addNewUser(User newUser){
 
-        int pinCode = newUser.getPinCode();
         String firstName = newUser.getFirstName();
         String lastName = newUser.getLastName();
+        String password = newUser.getPassword();
 
-        if((pinCode < 1000) || (pinCode > 9999)){
-            System.out.println("PIN must consist of 4 numbers, try again.");
+        for(User u : userList){
+
+            if((u.getFirstName().equals(firstName)) && (u.getLastName().equals(lastName))){
+                System.out.println("User with such a name already exists.");
+                return false;
+            }
+        }
+
+        if(password.length() < 5){
+            System.out.println("the password is too short");
             return false;
         }
 
@@ -88,7 +113,7 @@ public class ATM {
         if(!userList.isEmpty()){
             System.out.println();
             for(User u : userList){
-                System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPinCode());
+                System.out.println(u.getFirstName() + " " + u.getLastName() + " " + u.getPassword());
             }
         }
 
@@ -100,10 +125,6 @@ public class ATM {
     // save new Full Transaction Object to User
     moneySender.addTransaction(newTransactionForSender);
     moneyReceiver.addTransaction(newTransactionForReceiver);
-
-    // copies the new Transaction to the Users ObservableList, so it can be seen in TransactionHistory
-    moneySender.resetObservableTransactionList();
-    moneyReceiver.resetObservableTransactionList();
 
     // save new Full Transaction to .dat file
     saveAndLoad.saveNewTransaction(newTransactionForSender, moneySender);

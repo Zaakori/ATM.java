@@ -1,8 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,26 +7,20 @@ public class User implements Serializable{
 
     private String firstName;
     private String lastName;
-    private int pinCode;
+    private String password;
     private double currentMoney = 500;                 // GET RID OF THAT later
     private ArrayList<Transaction> transactionList;
-    private ObservableList<ObservableTransaction> observableTransactionList = FXCollections.observableArrayList();;
     private int amountOfTransactionsMade = 1;
 
     private static final long serialVersionUID = 1L;
 
     public User() {
-        if(this.observableTransactionList == null) {
-            System.out.println("WHY THE HELL YOU ARE NULL??!!");
-            observableTransactionList = FXCollections.observableArrayList();;
-
-        }
     }
 
-    public User(String firstName, String lastName, int pinCode) {
+    public User(String firstName, String lastName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.pinCode = pinCode;
+        this.password = password;
         this.transactionList = new ArrayList<>();
     }
 
@@ -49,12 +40,12 @@ public class User implements Serializable{
         this.lastName = lastName;
     }
 
-    public int getPinCode() {
-        return pinCode;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public double getCurrentMoney() {
@@ -78,20 +69,6 @@ public class User implements Serializable{
         this.transactionList = transactionList;
 
     }
-
-    public ObservableList<ObservableTransaction> getObservableTransactionList(){
-        return observableTransactionList;
-    }
-
-    public void resetObservableTransactionList(){
-
-        for(Transaction t : transactionList){
-
-            observableTransactionList.add(new ObservableTransaction(t.getTransactionNumber(), t.getSenderFullName(), t.getReceiverFullName(),
-                    t.getMoneyAmountTransfered(), t.getDateAndTime(), t.getMoneyLeft()));
-        }
-    }
-
 
     public int getAmountOfTransactionsMade() {
 
@@ -125,7 +102,7 @@ public class User implements Serializable{
 
         User otherUser = (User) obj;
 
-        if((otherUser.getFirstName().equals(firstName)) && (otherUser.getLastName().equals(lastName)) && (otherUser.getPinCode() == pinCode)){
+        if((otherUser.getFirstName().equals(firstName)) && (otherUser.getLastName().equals(lastName)) && (otherUser.getPassword().equals(password))){
             return true;
         }
 

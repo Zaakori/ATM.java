@@ -3,7 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -20,15 +20,10 @@ public class SignUpController {
     @FXML
     private TextField lastNameTextField;
     @FXML
-    private TextField pinTextField;
+    private TextField passwordTextField;
     @FXML
-    private Button signUpButton;
-    @FXML
-    private Button goBackButton;
+    private Label label;
 
-    public Button getSignUpButton() {
-        return signUpButton;
-    }
 
     // when you click a "SIGN UP" button is adds a new User to ATM instance and it is saved into
     // the .txt file using a SaveAndLoad class. After that it changes the Scene just like "go back" button
@@ -37,28 +32,21 @@ public class SignUpController {
 
         User newUser = new User();
 
-        newUser.setFirstName(firstNameTextField.getText());
-        newUser.setLastName(lastNameTextField.getText());
-        newUser.setPinCode(Integer.parseInt(pinTextField.getText()));
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/mainWindow.fxml"));
-
-        Scene mainScene = null;
         try{
-            mainScene = new Scene(fxmlLoader.load());
-        } catch(IOException e){
-            System.out.println("Could not load Main Window.");
-            return;
+            newUser.setFirstName(firstNameTextField.getText().trim());
+            newUser.setLastName(lastNameTextField.getText().trim());
+            newUser.setPassword(passwordTextField.getText().trim());
+        } catch (Exception e){
+            label.setText("Something went wrong, check if you entered all info correctly.");
         }
 
-        MainController mainCon = fxmlLoader.getController();
-        mainCon.getAtm().addNewUser(newUser);
+        boolean signUpButtonClick = MainController.getAtm().addNewUser(newUser);
 
-        Stage primaryStage = (Stage) signUpGridPane.getScene().getWindow();
-        primaryStage.setScene(mainScene);
-        primaryStage.show();
-
+        if(signUpButtonClick){
+            label.setText("User " + firstNameTextField.getText() + " " + lastNameTextField.getText() + " was added successfully.");
+        } else {
+            label.setText("Something went wrong, check if you entered all info correctly.");
+        }
     }
 
     @FXML

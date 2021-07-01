@@ -14,10 +14,7 @@ import java.io.IOException;
 
 public class MainController {
 
-    // WHERE STOPPED - implementing the TableView in transferHistoryWindow. Made a new class ObservableTransaction that is just a copy
-    // of Transaction but it can be used in TableView but there is some problem with its Serializability. I should do it in a way that
-    // Transaction is actually what is getting saved to .dat file and ObservableTransaction is exists only during applications runtime
-    // so that it is not being saved but copied every time from Transaction.
+    // WHERE STOPPED - TableView now works! now it´s time to polish out the bugs and errors left in the program
 
     @FXML
     private GridPane mainGridPane;
@@ -28,7 +25,7 @@ public class MainController {
     @FXML
     private TextField lastNameTextField;
     @FXML
-    private TextField pinTextField;
+    private TextField passwordTextField;
     private static ATM atm;
     private static User signedInUser;
 
@@ -58,9 +55,9 @@ public class MainController {
 
         String firstName = firstNameTextField.getText().trim();
         String lastName = lastNameTextField.getText().trim();
-        int pin = Integer.parseInt(pinTextField.getText().trim());
+        String password = passwordTextField.getText().trim();
 
-        User inputUser = new User(firstName, lastName, pin);
+        User inputUser = new User(firstName, lastName, password);
         boolean exitWhileLoop = true;
 
 
@@ -69,7 +66,6 @@ public class MainController {
             for(User u : atm.getUserList()){
 
                 if(u.equals(inputUser)){
-                    testLabel.setText("Sign In Test: YOU ARE SIGNED IN!");
                     signedInUser = u;
                     changeSceneToProfileWindow();
                     return;

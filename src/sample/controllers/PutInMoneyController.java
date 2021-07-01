@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ public class PutInMoneyController {
     private GridPane putInMoneyGridPane;
     @FXML
     private TextField addMoneyTextField;
+    @FXML
+    private Label label;
     private User signedInUser;
 
 
@@ -30,13 +33,23 @@ public class PutInMoneyController {
     @FXML
     public void addMoneyToBalance(){
 
+        double amountToAdd;
+
+        try{
+            amountToAdd = Double.parseDouble(addMoneyTextField.getText());
+        } catch (Exception e){
+            label.setText("Something went wrong, check the money amount.");
+            return;
+        }
+
         // checks, that you can´t add negative amounts of money
-        if(Double.parseDouble(addMoneyTextField.getText()) < 0){
+        if(amountToAdd < 0){
             return;
         }
 
         // adds the money
-        signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() + Double.parseDouble(addMoneyTextField.getText()));
+        signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() + amountToAdd);
+        label.setText(amountToAdd + " was successfully added to your account.");
     }
 
     // changes Scene to Profile Page
