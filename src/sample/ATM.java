@@ -120,16 +120,20 @@ public class ATM {
         return true;
     }
 
-    public void addNewFullTransaction(Transaction newTransactionForSender, Transaction newTransactionForReceiver, User moneySender, User moneyReceiver){
+    public void addNewTransaction(Transaction newTransaction, User user){
 
-    // save new Full Transaction Object to User
-    moneySender.addTransaction(newTransactionForSender);
-    moneyReceiver.addTransaction(newTransactionForReceiver);
+        // save Transaction Object to User
+        user.addTransaction(newTransaction);
 
-    // save new Full Transaction to .dat file
-    saveAndLoad.saveNewTransaction(newTransactionForSender, moneySender);
-    saveAndLoad.saveNewTransaction(newTransactionForReceiver, moneyReceiver);
+        // save Transaction to .dat file
+        saveAndLoad.saveNewTransaction(newTransaction, user);
 
+    }
+
+    public void addNewTransaction(Transaction newTransactionForSender, Transaction newTransactionForReceiver, User moneySender, User moneyReceiver){
+
+        addNewTransaction(newTransactionForSender, moneySender);
+        addNewTransaction(newTransactionForReceiver, moneyReceiver);
     }
 
     private boolean stringValidation(String userInput){

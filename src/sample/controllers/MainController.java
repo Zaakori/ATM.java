@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -14,18 +15,16 @@ import java.io.IOException;
 
 public class MainController {
 
-    // WHERE STOPPED - TableView now works! now it´s time to polish out the bugs and errors left in the program
+    // WHERE STOPPED - in TableView each time you go there another copy of Transactions is added, gotta clear that up
 
     @FXML
     private GridPane mainGridPane;
-    @FXML
-    private Label testLabel;
     @FXML
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordField;
     private static ATM atm;
     private static User signedInUser;
 
@@ -55,7 +54,7 @@ public class MainController {
 
         String firstName = firstNameTextField.getText().trim();
         String lastName = lastNameTextField.getText().trim();
-        String password = passwordTextField.getText().trim();
+        String password = passwordField.getText().trim();
 
         User inputUser = new User(firstName, lastName, password);
         boolean exitWhileLoop = true;
@@ -73,9 +72,6 @@ public class MainController {
             }
             exitWhileLoop = false;
         }
-
-        testLabel.setText("Sign In Test: NO SUCH USER FOUND");
-
     }
 
 

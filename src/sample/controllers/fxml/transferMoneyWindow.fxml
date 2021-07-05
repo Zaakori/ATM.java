@@ -14,10 +14,11 @@
     <TextField fx:id="whoToSendToTextField" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
     <Label text="How much money do you wish to send?" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
     <TextField fx:id="sendMoneyTextField" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label fx:id="label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
 
-    <Button text="SEND MONEY" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#transferMoney"/>
+    <Button text="SEND MONEY" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#transferMoney"/>
 
-    <Button text="EXIT to Profile Page" GridPane.rowIndex="8" GridPane.columnIndex="0" onAction="#changeScene"/>
+    <Button text="EXIT to Profile Page" GridPane.rowIndex="9" GridPane.columnIndex="0" onAction="#changeScene"/>
 
 
 

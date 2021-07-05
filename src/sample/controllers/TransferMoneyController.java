@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -11,6 +12,8 @@ import sample.Transaction;
 import sample.User;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,13 +22,12 @@ public class TransferMoneyController {
 
     @FXML
     private GridPane transferMoneyGridPane;
-
     @FXML
     private TextField whoToSendToTextField;
-
     @FXML
     private TextField sendMoneyTextField;
-
+    @FXML
+    private Label label;
     private User signedInUser = MainController.getSignedInUser();
     private ATM atm = MainController.getAtm();
 
@@ -34,35 +36,49 @@ public class TransferMoneyController {
     @FXML
     public void transferMoney(){
 
-        double transferAmount = Double.parseDouble(sendMoneyTextField.getText());
+        double transferAmount;
+
+        try{
+            BigDecimal bd = new BigDecimal(sendMoneyTextField.getText()).setScale(2, RoundingMode.CEILING);
+            transferAmount = bd.doubleValue();
+        } catch (Exception e){
+            label.setText("Something went wrong, check the money amount.");
+            e.printStackTrace();
+            return;
+        }
 
         if(transferAmount > signedInUser.getCurrentMoney()){
-            System.out.println("can´t send more money that what you have!");
+            label.setText("It´s not possible to transfer more money than there is in your account.");
+            return;
+        }
+
+        if(transferAmount < 0){
+            label.setText("Transferring negative amounts of money is not possible.");
             return;
         }
 
         String[] inputUser = whoToSendToTextField.getText().split(" ");
-
         User foundUser = MainController.findUser(inputUser[0], inputUser[1]);
 
         if(foundUser == null){
+            label.setText("The User was not found.");
             return;
         }
 
         if(foundUser.equals(signedInUser)){
-            System.out.println("no use in sending money to yourself");
+            label.setText("It´s not possible to transfer money to yourself.");
             return;
         }
 
         signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() - transferAmount);
         foundUser.setCurrentMoney(foundUser.getCurrentMoney() + transferAmount);
 
+        label.setText(transferAmount + " was transferred successfully to " + foundUser.getFirstName() + " " + foundUser.getLastName() + ".");
+
         System.out.println("found user now has " + MainController.findUser(inputUser[0], inputUser[1]).getCurrentMoney());
         System.out.println("signed in user now has " + MainController.getSignedInUser().getCurrentMoney());
 
-
         makeAndSaveFullTransaction(foundUser, transferAmount);
-
     }
 
     // makes a Transaction, so just writes down all the info about sending the money
@@ -83,7 +99,7 @@ public class TransferMoneyController {
                 moneyReceiver.getFirstName() + " " + moneyReceiver.getLastName(),
                 transferAmount, formattedDateTime, moneyReceiver.getCurrentMoney());
 
-        atm.addNewFullTransaction(senderTransaction, receiverTransaction, signedInUser, moneyReceiver);
+        atm.addNewTransaction(senderTransaction, receiverTransaction, signedInUser, moneyReceiver);
 
     }
 

@@ -18,9 +18,11 @@ public class TransferHistoryController {
     @FXML
     private TableView tableView;
 
+
     public void initialize(){
 
         if(MainController.getSignedInUser().getTransactionList() != null){
+
             tableView.setItems(MainController.getAtm().getSignedInUserObservableList());
         }
     }
