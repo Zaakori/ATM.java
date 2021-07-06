@@ -9,12 +9,12 @@
 <GridPane fx:id="profileGridPane" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.ProfileController"
           alignment="center" hgap="10" vgap="10">
 
-    <Button text="Put in Money" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#changeSceneToPutInMoneyWindow"/>
-    <Button text="Take out Money" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#changeSceneToTakeOutMoneyWindow"/>
-    <Button text="Transfer Money" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeSceneToTransferMoneyWindow"/>
-    <Button text="Check Balance" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#changeSceneToCheckBalanceWindow"/>
-    <Button text="Check Transfer history" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#changeSceneToTransferHistoryWindow"/>
+    <Button text="Put in Money" prefWidth="140" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#changeSceneToPutInMoneyWindow"/>
+    <Button text="Take out Money" prefWidth="140" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#changeSceneToTakeOutMoneyWindow"/>
+    <Button text="Transfer Money" prefWidth="140" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#changeSceneToTransferMoneyWindow"/>
+    <Button text="Check Balance" prefWidth="140" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#changeSceneToCheckBalanceWindow"/>
+    <Button text="Check Transfer history" prefWidth="140" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#changeSceneToTransferHistoryWindow"/>
 
-    <Button text="EXIT" GridPane.rowIndex="8" GridPane.columnIndex="0" onAction="#changeSceneToMainWindow"/>
+    <Button text="EXIT"  GridPane.rowIndex="8" GridPane.columnIndex="0" onAction="#changeSceneToMainWindow"/>
 
 </GridPane>

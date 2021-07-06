@@ -54,7 +54,7 @@ public class SignUpController {
 
         Scene mainScene = null;
         try{
-            mainScene = new Scene(FXMLLoader.load(getClass().getResource("fxml/mainWindow.fxml")));
+            mainScene = new Scene(FXMLLoader.load(getClass().getResource("fxml/mainWindow.fxml")), 400, 400);
         } catch(IOException e){
             System.out.println("Could not load Main Window.");
             return;

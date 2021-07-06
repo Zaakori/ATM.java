@@ -8,7 +8,7 @@
 
 <GridPane fx:id="checkBalanceGridPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.CheckBalanceController" hgap="10" vgap="10">
+            fx:controller="sample.controllers.CheckBalanceController" alignment="CENTER" hgap="10" vgap="10">
 
     <Label fx:id="balanceLabel"/>
     <Button text="EXIT to Profile Page" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#changeScene"/>

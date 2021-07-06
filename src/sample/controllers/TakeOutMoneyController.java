@@ -87,7 +87,7 @@ public class TakeOutMoneyController {
 
         Scene scene = null;
         try{
-            scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")));
+            scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){
             System.out.println("Could not load Window.");
             return;

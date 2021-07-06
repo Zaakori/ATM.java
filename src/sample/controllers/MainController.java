@@ -49,7 +49,6 @@ public class MainController {
     }
 
     @FXML
-
     public void signIn() throws IOException{
 
         String firstName = firstNameTextField.getText().trim();
@@ -66,6 +65,7 @@ public class MainController {
 
                 if(u.equals(inputUser)){
                     signedInUser = u;
+                    atm.setObservableList();
                     changeSceneToProfileWindow();
                     return;
                 }
@@ -83,7 +83,7 @@ public class MainController {
 
         Scene profileScene = null;
         try{
-            profileScene = new Scene(fxmlLoader.load());
+            profileScene = new Scene(fxmlLoader.load(), 400, 400);
         } catch(IOException e){
             System.out.println("Could not load Profile Window.");
             return;
@@ -104,7 +104,7 @@ public class MainController {
 
         Scene signUpScene = null;
         try{
-            signUpScene = new Scene(fxmlLoader.load());
+            signUpScene = new Scene(fxmlLoader.load(), 400, 400);
         } catch(IOException e){
             System.out.println("Could not load Sign Up Window.");
             return;

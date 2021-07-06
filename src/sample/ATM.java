@@ -39,7 +39,6 @@ public class ATM {
 
                 u.setAmountOfTransactionsMade(lastTransaction.getTransactionNumber());
                 u.setCurrentMoney(lastTransaction.getMoneyLeft());
-
             }
         }
     }
@@ -48,15 +47,16 @@ public class ATM {
         return userList;
     }
 
-    public ObservableList<ObservableTransaction> getSignedInUserObservableList(){
-
+    public void setObservableList(){
         for(Transaction t :  MainController.getSignedInUser().getTransactionList()){
 
             signedInUserObservableList.add(new ObservableTransaction(t.getTransactionNumber(), t.getSenderFullName(),
                     t.getReceiverFullName(), t.getMoneyAmountTransfered(), t.getDateAndTime(), t.getMoneyLeft()));
 
         }
+    }
 
+    public ObservableList<ObservableTransaction> getSignedInUserObservableList(){
         return signedInUserObservableList;
     }
 
