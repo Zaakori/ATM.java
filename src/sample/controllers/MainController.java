@@ -3,19 +3,16 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.ATM;
 import sample.User;
-
 import java.io.IOException;
 
+  // controller for the Window that you get when opening the program, the Sign In window
 public class MainController {
-
-    // WHERE STOPPED - in TableView each time you go there another copy of Transactions is added, gotta clear that up
 
     @FXML
     private GridPane mainGridPane;
@@ -30,8 +27,8 @@ public class MainController {
 
 
     public void initialize(){
-        this.atm = new ATM();
-        this.signedInUser = new User();
+        atm = new ATM();
+        signedInUser = new User();
     }
 
     public static ATM getAtm() {
@@ -42,19 +39,18 @@ public class MainController {
         return signedInUser;
     }
 
+    // used to find the needed User from the ATM classes UserList and return it if the correct User was found
     public static User findUser(String inputFirstName, String inputLastName){
-
     return atm.findAndReturnUser(inputFirstName, inputLastName);
-
     }
 
+    // method to 'get into ATM' using full name and password combination
     @FXML
-    public void signIn() throws IOException{
+    public void signIn(){
 
         String firstName = firstNameTextField.getText().trim();
         String lastName = lastNameTextField.getText().trim();
         String password = passwordField.getText().trim();
-
         User inputUser = new User(firstName, lastName, password);
         boolean exitWhileLoop = true;
 
@@ -65,7 +61,11 @@ public class MainController {
 
                 if(u.equals(inputUser)){
                     signedInUser = u;
-                    atm.setObservableList();
+
+                    if(signedInUser.getTransactionList() != null){
+                        atm.setObservableList();
+                    }
+
                     changeSceneToProfileWindow();
                     return;
                 }
@@ -74,14 +74,15 @@ public class MainController {
         }
     }
 
-
+    // changes Scene to Profile Window Scene
     @FXML
-    public void changeSceneToProfileWindow() throws IOException{
+    public void changeSceneToProfileWindow(){
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("fxml/profileWindow.fxml"));
+        Scene profileScene;
 
-        Scene profileScene = null;
+
         try{
             profileScene = new Scene(fxmlLoader.load(), 400, 400);
         } catch(IOException e){
@@ -96,13 +97,15 @@ public class MainController {
 
     }
 
+    // changes Scene to Sign Up Scene, where you can sign up new Users
     @FXML
-    public void changeSceneToSignUpWindow() throws IOException{
+    public void changeSceneToSignUpWindow(){
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("fxml/signUpWindow.fxml"));
+        Scene signUpScene;
 
-        Scene signUpScene = null;
+
         try{
             signUpScene = new Scene(fxmlLoader.load(), 400, 400);
         } catch(IOException e){
@@ -114,6 +117,5 @@ public class MainController {
         primaryStage.setScene(signUpScene);
         primaryStage.setTitle("SIGN UP");
         primaryStage.show();
-
     }
 }

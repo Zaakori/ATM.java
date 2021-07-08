@@ -10,14 +10,14 @@ import javafx.stage.Stage;
 import sample.ATM;
 import sample.Transaction;
 import sample.User;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
+
+  // controller for Window where User can take out money, just like in ATM
 public class TakeOutMoneyController {
 
     @FXML
@@ -27,9 +27,9 @@ public class TakeOutMoneyController {
     @FXML
     private Label label;
     private User signedInUser;
-    private ATM atm = MainController.getAtm();
+    private final ATM atm = MainController.getAtm();
 
-    // is called every time this Scene is loaded
+
     public void initialize(){
         this.signedInUser = MainController.getSignedInUser();
     }
@@ -39,6 +39,7 @@ public class TakeOutMoneyController {
     public void takeOutMoney(){
 
         double amountToTakeOut;
+
 
         try{
             BigDecimal bd = new BigDecimal(takeOutMoneyTextField.getText()).setScale(2, RoundingMode.CEILING);
@@ -79,13 +80,16 @@ public class TakeOutMoneyController {
                 -amountToTakeOut, formattedDateTime, signedInUser.getCurrentMoney());
 
         atm.addNewTransaction(newTransaction, signedInUser);
+        atm.setObservableList();
     }
 
     // changes Scene to Profile Page (so, goes back)
     @FXML
     public void changeScene(){
 
-        Scene scene = null;
+        Scene scene;
+
+
         try{
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){
@@ -98,5 +102,4 @@ public class TakeOutMoneyController {
         primaryStage.setTitle("Profile Page");
         primaryStage.show();
     }
-
 }

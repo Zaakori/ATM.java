@@ -8,9 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.User;
-
 import java.io.IOException;
 
+
+  // controller for Window where it´s possible to sign up new Users
 public class SignUpController {
 
     @FXML
@@ -26,11 +27,12 @@ public class SignUpController {
 
 
     // when you click a "SIGN UP" button is adds a new User to ATM instance and it is saved into
-    // the .txt file using a SaveAndLoad class. After that it changes the Scene just like "go back" button
+    // the .dat file using a SaveAndLoad class
     @FXML
     public void addNewUserAndExitSignUpWindow(){
 
         User newUser = new User();
+
 
         try{
             newUser.setFirstName(firstNameTextField.getText().trim());
@@ -49,10 +51,13 @@ public class SignUpController {
         }
     }
 
+    // changes Scene to Main Window Scene
     @FXML
     public void changeSceneToMainWindow(){
 
-        Scene mainScene = null;
+        Scene mainScene;
+
+
         try{
             mainScene = new Scene(FXMLLoader.load(getClass().getResource("fxml/mainWindow.fxml")), 400, 400);
         } catch(IOException e){
@@ -65,7 +70,4 @@ public class SignUpController {
         primaryStage.setTitle("ATM interface");
         primaryStage.show();
     }
-
-
-
 }

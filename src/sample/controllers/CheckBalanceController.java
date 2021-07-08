@@ -6,9 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
+  // controller for the Window where you can see your current balance, that´s it
 public class CheckBalanceController {
 
     @FXML
@@ -16,17 +16,20 @@ public class CheckBalanceController {
     @FXML
     private Label balanceLabel;
 
-    private double balance;
 
     public void initialize(){
+
+        double balance;
+
         balance = MainController.getSignedInUser().getCurrentMoney();
-        balanceLabel.setText("You have: " + Double.toString(balance) + " EUR");
+        balanceLabel.setText("You have: " + balance + " EUR");
     }
 
-    @FXML
+    // changes Scene to Profile Page Scene
+      @FXML
     public void changeScene(){
 
-        Scene scene = null;
+        Scene scene;
         try{
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){
@@ -39,8 +42,4 @@ public class CheckBalanceController {
         primaryStage.setTitle("Profile Page");
         primaryStage.show();
     }
-
-
-
-
 }

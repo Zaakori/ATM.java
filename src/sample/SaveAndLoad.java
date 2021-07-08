@@ -3,27 +3,29 @@ package sample;
 import java.io.*;
 import java.util.ArrayList;
 
+  // here the Users and their Transactions are saved and loaded from .dat files
 public class SaveAndLoad {
 
-    public boolean saveUserToTextFile(User user){
 
-        if(user == null){
-            return false;
-        }
+    // saves new User to .dat file
+    public void saveUserToTextFile(User user){
 
         File userInfoFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\userList.dat");
+
+        if(user == null){
+            return;
+        }
 
         try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userInfoFile, true)))){
             objOut.writeObject(user);
 
-            return true;
         } catch (IOException e){
             System.out.println("IO Exception");
             e.printStackTrace();
-            return false;
         }
     }
 
+    // loads UserList from .dat file
     public ArrayList<User> loadUserList(){
 
         try{
@@ -59,14 +61,12 @@ public class SaveAndLoad {
         return null;
     }
 
-    // saves (adds) a new transaction to a .txt file, there is a separate file for each User.
-    // if there is no file the new file gets created
-    public boolean saveNewTransaction(Transaction newTransaction, User theUser){
+    // saves (adds) a new Transaction to .dat file, there is a separate file for each User.
+    // if there is no file then a new file is created
+    public void saveNewTransaction(Transaction newTransaction, User theUser){
 
-        System.out.println(newTransaction.toString());
-
-        if((newTransaction == null) || (theUser == null)){
-            return false;
+        if(theUser == null){
+            return;
         }
 
         File userTransactionFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\"
@@ -74,21 +74,21 @@ public class SaveAndLoad {
 
 
         try(ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(userTransactionFile, true)))){
-            objOut.writeObject(newTransaction);
 
-            return true;
+            objOut.writeObject(newTransaction);
         } catch (IOException e){
+
             System.out.println("IO Exception");
             e.printStackTrace();
-            return false;
         }
     }
 
-    // loads needed Transaction list to the needed User
+    // loads needed Transaction list
     public ArrayList<Transaction> loadTransactionList(User theUser){
 
-        File userTransactionFile = null;
-        boolean fileExists = false;
+        File userTransactionFile;
+        boolean fileExists;
+
 
         // checking, if the selected User even has made any Transactions a.k.a even has a TransactionList file
             userTransactionFile = new File("C:\\Users\\User\\IdeaProjects\\ATMproject\\src\\sample\\datafiles\\"

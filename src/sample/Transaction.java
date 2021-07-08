@@ -1,19 +1,19 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
 import java.io.Serializable;
 
-
+  // it´s a Transaction, simply put it´s just a record with all the info about the Transaction
 public class Transaction implements Serializable {
 
-    private int transactionNumber;
-    private String senderFullName;
-    private String receiverFullName;
-    private double moneyAmountTransfered;
-    private String dateAndTime;
-    private double moneyLeft;
+    private final int transactionNumber;
+    private final String senderFullName;
+    private final String receiverFullName;
+    private final double moneyAmountTransfered;
+    private final String dateAndTime;
+    private final double moneyLeft;
 
     private static final long serialVersionUID = 2L;
+
 
     public Transaction(int transactionNumber, String senderFullName, String receiverFullName, double moneyAmountTransfered,
                        String dateAndTime, double moneyLeft) {

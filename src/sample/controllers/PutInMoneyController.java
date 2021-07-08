@@ -10,13 +10,14 @@ import javafx.stage.Stage;
 import sample.ATM;
 import sample.Transaction;
 import sample.User;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
+  // controller for Window where User can put money into his account, just like in an ATM
 public class PutInMoneyController {
 
     @FXML
@@ -26,7 +27,7 @@ public class PutInMoneyController {
     @FXML
     private Label label;
     private User signedInUser;
-    private ATM atm = MainController.getAtm();
+    private final ATM atm = MainController.getAtm();
 
 
     public void initialize(){
@@ -34,12 +35,14 @@ public class PutInMoneyController {
     }
 
 
-    // adds money to the Users account
+    // adds money to the User object
     @FXML
     public void addMoneyToBalance(){
 
         double amountToAdd;
 
+
+        // makes so that no matter how many numbers after the dot, anyway there will be only two decimal places
         try{
             BigDecimal bd = new BigDecimal(addMoneyTextField.getText()).setScale(2, RoundingMode.CEILING);
             amountToAdd = bd.doubleValue();
@@ -74,13 +77,16 @@ public class PutInMoneyController {
                 amountToAdd, formattedDateTime, signedInUser.getCurrentMoney());
 
         atm.addNewTransaction(newTransaction, signedInUser);
+        atm.setObservableList();
     }
 
-    // changes Scene to Profile Page
+    // changes Scene to Profile Page Scene
     @FXML
     public void changeScene(){
 
-        Scene scene = null;
+        Scene scene;
+
+
         try{
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){

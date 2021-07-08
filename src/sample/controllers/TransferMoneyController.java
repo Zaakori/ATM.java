@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import sample.ATM;
 import sample.Transaction;
 import sample.User;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+  // controller for Window where User can transfer money to other User
 public class TransferMoneyController {
 
     @FXML
@@ -28,15 +28,16 @@ public class TransferMoneyController {
     private TextField sendMoneyTextField;
     @FXML
     private Label label;
-    private User signedInUser = MainController.getSignedInUser();
-    private ATM atm = MainController.getAtm();
+    private final User signedInUser = MainController.getSignedInUser();
+    private final ATM atm = MainController.getAtm();
 
 
-    // actually sends money from one User to the other
+    // sends money from one User object to the other
     @FXML
     public void transferMoney(){
 
         double transferAmount;
+
 
         try{
             BigDecimal bd = new BigDecimal(sendMoneyTextField.getText()).setScale(2, RoundingMode.CEILING);
@@ -72,13 +73,9 @@ public class TransferMoneyController {
 
         signedInUser.setCurrentMoney(signedInUser.getCurrentMoney() - transferAmount);
         foundUser.setCurrentMoney(foundUser.getCurrentMoney() + transferAmount);
+        makeAndSaveFullTransaction(foundUser, transferAmount);
 
         label.setText(transferAmount + " was transferred successfully to " + foundUser.getFirstName() + " " + foundUser.getLastName() + ".");
-
-        System.out.println("found user now has " + MainController.findUser(inputUser[0], inputUser[1]).getCurrentMoney());
-        System.out.println("signed in user now has " + MainController.getSignedInUser().getCurrentMoney());
-
-        makeAndSaveFullTransaction(foundUser, transferAmount);
     }
 
     // makes a Transaction, so just writes down all the info about sending the money
@@ -100,14 +97,16 @@ public class TransferMoneyController {
                 transferAmount, formattedDateTime, moneyReceiver.getCurrentMoney());
 
         atm.addNewTransaction(senderTransaction, receiverTransaction, signedInUser, moneyReceiver);
-
+        atm.setObservableList();
     }
 
     // changes Scene to Profile Page (goes back)
     @FXML
     public void changeScene(){
 
-        Scene scene = null;
+        Scene scene;
+
+
         try{
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){

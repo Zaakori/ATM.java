@@ -4,23 +4,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.ObservableTransaction;
-import sample.Transaction;
-import sample.User;
-
 import java.io.IOException;
 
+
+  // controller for Window where User can see in TableView the history of his transactions
 public class TransferHistoryController {
 
     @FXML
     private GridPane transferHistoryGridPane;
     @FXML
     private TableView tableView;
-    private ObservableList<ObservableTransaction> observableList = MainController.getAtm().getSignedInUserObservableList();
+    private final ObservableList<ObservableTransaction> observableList = MainController.getAtm().getSignedInUserObservableList();
 
 
     public void initialize(){
@@ -30,13 +28,13 @@ public class TransferHistoryController {
         }
     }
 
-
-
     // changes Scene to Profile Page (so, goes back)
     @FXML
     public void changeScene(){
 
-        Scene scene = null;
+        Scene scene;
+
+
         try{
             scene = new Scene(FXMLLoader.load(getClass().getResource("fxml/profileWindow.fxml")), 400, 400);
         } catch(IOException e){
